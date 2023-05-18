@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body{
+    background: #eef4fc;
+    height: 100vh;
+    font-family: 'Ubuntu', sans-serif;
+}
