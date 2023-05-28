@@ -1,8 +1,15 @@
+import NavigateMultiStep from './NavigateMultiStep';
 
 
 const Confirm:React.FC = () => {
   return (
-  <div className='bg-white rounded-xl items-center flex justify-center md:p-0  p-12 md:h-72 -mt-12 md:mt-0'>
+   <div className='md:max-w-4xl md:container md:mx-auto '>
+<div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
+<NavigateMultiStep/>
+
+
+  <div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
+   <div className='bg-white rounded-xl items-center flex justify-center md:p-0  p-12 md:h-72 -mt-12 md:mt-0'>
      <div className='px-12 '>
       <div className="text-center  ">
      <div className="mx-auto flex justify-center flex-col space-y-4 md:mt-24">
@@ -17,6 +24,9 @@ free to email us at support@loremgaming.com
    </div>
      </div>
   </div>
+ </div>
+ </div>
+ </div>
   )
 }
 

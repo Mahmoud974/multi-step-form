@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { MyInterface } from '../shared/modal';
 import { useEffect, useState} from 'react';
+import NavigateMultiStep from './NAvigateMultiStep';
 
 
 const Plan:React.FC = () => {
@@ -89,7 +90,12 @@ console.log(isOn);
 
   
   return (
-   <div>
+       <div className='md:max-w-4xl md:container md:mx-auto '>
+<div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
+<NavigateMultiStep/>
+
+
+  <div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
     <div className='bg-white rounded-xl -mt-12 pb-12 md:pb-0'>
     <div className='md:px-0 px-12'>
       <h1 className="md:text-3xl text-xl font-bold text-blue-900 mt:pt-0 pt-12 ">
@@ -151,10 +157,15 @@ Please provide your name, email, adress and phone number
     
    </div>
 
-<div className="flex justify-between mt-20 items-center md:hidden ">
-       <NavLink to='/'>
 
-         <p className="text-blue-900 font-bold cursor-pointer">Go back</p>
+
+
+
+   </div>
+    {/* Display on the mobile */}
+<div className="flex justify-between mt-20 items-center md:hidden mx-8 ">
+       <NavLink to='/'>
+      <p className="text-blue-900 font-bold cursor-pointer">Go back</p>
        </NavLink>
        <div className="justify-end  ">
 {
@@ -165,10 +176,7 @@ Please provide your name, email, adress and phone number
        </div>
      
     </div>
-
-
-
-
+   </div>
    </div>
   )
 }

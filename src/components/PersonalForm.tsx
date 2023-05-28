@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form';
 import { IFormInput } from '../shared/modal';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import NavigateMultiStep from './NAvigateMultiStep';
 
 
 const PersonalForm:React.FC = () => {
@@ -15,7 +16,11 @@ const onSubmit = ():void => setValidateMyForm(true)
 
   
   return (
-   <div>
+     <div className='md:max-w-4xl md:container md:mx-auto '>
+<div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
+<NavigateMultiStep/>
+
+  <div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
      <div className=' bg-white rounded-xl -mt-12'>
      <div className='px-12 md:px-0'>
        <h1 className="md:text-3xl text-xl font-bold text-blue-900 mt:pt-0 pt-12">
@@ -62,18 +67,20 @@ Please provide your name, email, adress and phone number
   </form>
   
     </div>
-{/* Display on the mobile */}
-       <div className="flex justify-end md:hidden mb-12">
-      {validateMyForm ?
-       <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8" />
-       : <NavLink to='/step2'>
-      <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8" />
-      </NavLink>   
-
-       
-     }
     
     </div>
+   </div>
+   {/* Display on the mobile */}
+          <div className="flex justify-end md:hidden mb-12">
+         {validateMyForm ?
+          <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8" />
+          : <NavLink to='/step2'>
+         <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8" />
+         </NavLink>   
+   
+          
+        }
+   </div>
    </div>
   )
 }

@@ -1,5 +1,6 @@
 
 import { NavLink } from 'react-router-dom';
+import NavigateMultiStep from './NavigateMultiStep';
 
 
 
@@ -12,7 +13,12 @@ const pickDataJSON = localStorage.getItem('data')
   const pickDataPlan =  pickPlanJSON? JSON.parse(pickPlanJSON) : null
   const dataGlobal = pickData.map((ok:{price: number}) => Number(ok.price.match(/\d+/)[0]));
 return (
-   <div>
+   <div className='md:max-w-4xl md:container md:mx-auto '>
+<div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
+<NavigateMultiStep/>
+
+
+  <div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
     <div className='bg-white pb-12  rounded-xl -mt-12 mx-6 md:mx-0'>
    <div className='px-12 md:px-0'>
       <h1 className="md:text-3xl text-xl font-bold text-blue-900 mt:pt-0 pt-12">
@@ -81,6 +87,8 @@ Double-check everything looks OK before conrfiming.
    </div>
    
     </div>
+   </div>
+     {/* Display on the mobile */}
      <div className="flex justify-between mt-20 items-center md:hidden mx-8">
           
        <NavLink to='/step3'>
@@ -91,6 +99,9 @@ Double-check everything looks OK before conrfiming.
 </NavLink>
     </div>
    </div>
+
+   </div>
+
   )
 }
 
