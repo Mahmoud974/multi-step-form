@@ -16,39 +16,39 @@ const [isChecked, setIsChecked] = useState<boolean>(false);
 const plan: MyInterface[] =  [
     {
       id: 1,
-      img:"public/icon-arcade.svg",
+      img:"/img/icon-arcade.svg",
       title: "Arcade",
       price: "$9/mo"
     },
     {
       id: 2,
-      img:"public/icon-pro.svg",
+      img:"/img/icon-pro.svg",
       title: "Advanced",
       price: "$12/mo"
     },
     {
       id: 3,
-      img:"public/icon-advanced.svg",
+      img:"/img/icon-advanced.svg",
       title: "Pro",
       price: "$15/mo"
     },
        {
       id: 4,
-      img:"public/icon-arcade.svg",
+      img:"/img/icon-arcade.svg",
       title: "Arcade",
       price: "$90/yr",
       offer: "2 months free"
     },
     {
       id: 5,
-      img:"public/icon-pro.svg",
+      img:"/img/icon-pro.svg",
       title: "Advanced",
       price: "$120/yr",
        offer: "2 months free"
     },
     {
       id: 6,
-      img:"public/icon-advanced.svg",
+      img:"/img/icon-advanced.svg",
       title: "Pro",
       price: "$150/yr",
        offer: "2 months free"

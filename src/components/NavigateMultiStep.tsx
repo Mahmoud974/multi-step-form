@@ -5,7 +5,7 @@ const NavigateMultiStep = () => {
   const location = useLocation()
 
   return (
-        <div className="md:mt-0 w-94 md:bg-[url('./bg-sidebar-desktop.svg')] w-full md:h-full md:w-[17em] md:rounded-lg md:h-42 h-56 bg-[url('./bg-sidebar-mobile.svg')] bg-cover -mt-12">
+        <div className="md:mt-0 w-94 md:bg-[url('/img/bg-sidebar-desktop.svg')] w-full md:h-full md:w-[17em] md:rounded-lg md:h-42 h-56 bg-[url('./bg-sidebar-mobile.svg')] bg-cover -mt-12">
   <ul className="flex md:justify-start md:flex-col md:ml-12 mt-12  md:mt-6 justify-center space-x-3 md:space-x-0 py-20 md:py-0">
     <NavLink to='/'>
       <li className='flex text-white items-center md:mt-6' >
