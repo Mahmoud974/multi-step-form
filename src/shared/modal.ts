@@ -3,7 +3,7 @@ export interface MyInterface {
     img?:string,
     title: string,
     text?: string,
-    price?: string,
+    price?: string | number ,
     offer?: string
   }
 

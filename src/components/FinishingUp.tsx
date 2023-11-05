@@ -4,14 +4,39 @@ import NavigateMultiStep from './NavigateMultiStep';
 
 
 
+
 const FinishingUp:React.FC = () => {
  
 const pickDataJSON = localStorage.getItem('data')
   const pickPlanJSON = localStorage.getItem('myDataPlan')
-  
   const pickData =  pickDataJSON ? JSON.parse(pickDataJSON) : null
   const pickDataPlan =  pickPlanJSON? JSON.parse(pickPlanJSON) : null
-  const dataGlobal = pickData.map((ok:{price: number}) => Number(ok.price.match(/\d+/)[0]));
+  const dataGlobal = pickData.map((item:any) => {
+  const priceString = item.price.toString();
+  const matches = priceString.match(/\d+/); 
+  if (matches) {
+    return Number(matches[0]);
+  } else {
+  return 0; 
+  }
+});
+
+
+  const planPrice = (): null | number => {
+  let cutNumber;
+
+  if (pickDataPlan.price.includes('/mo')) {
+   
+    cutNumber = pickDataPlan.price.split('/mo')[0].split('$');
+  } else if (pickDataPlan.price.includes('/yr')) {
+    cutNumber = pickDataPlan.price.split('/yr')[0].split('$');
+
+  } else {
+  return null;
+  }
+  return Number(cutNumber[1]);
+};
+  
 return (
    <div className='md:max-w-4xl md:container md:mx-auto '>
 <div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
@@ -34,8 +59,8 @@ Double-check everything looks OK before conrfiming.
            {/* Pick one Plan */}
         <div className='flex justify-between mx-8 -mb-2 font-bold text-blue-950'>
            <h1 className=''>
-        {pickDataPlan.title} 
-         (Monthly)
+        {pickDataPlan.title } 
+          ({pickDataPlan.price.includes('/mo') ? 'Monthly' : 'Yearly'})
        </h1>
        <p className=''>
         {pickDataPlan.price}
@@ -45,33 +70,28 @@ Double-check everything looks OK before conrfiming.
      
        </div>
          {/* Divider */}
-          {/* <div className='my-6 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent '></div> */}
+       
              <div className='my-6 h-px border-t-2  bg-transparent  mx-12 '></div>
            <ul>
 {
-  pickData.map((option:{title: string; price: number }) =><li className='md:mt-2 mt-3'>
+  pickData.map((option:{title: string; price: number }) =><li key={Math.random()} className='md:mt-2 mt-3'>
        <div className='flex justify-between mx-4 mr-8 '>
  
          <h2 className='text-xs text-gray-400'>
           {option.title}
         </h2>
         <p className='text-xs text-blue-900'>
-           {`+$${Number(option.price.match(/\d+/)[0])}/mo`}
-       
-        </p>
+           {`${String(option.price)}`}</p>
    </div>
     
       </li> )
 }
 
-      
-           </ul>
-          
-           
-        </div>
+</ul>
+          </div>
          <div className='flex justify-between mx-8 mt-4 md:mt-8 '>
-            <small>Total (per month)</small>
-            <small className='text-violet-500 font-bold'>{ `+${+dataGlobal.reduce((a,b) => a + b ) } /mo`}</small>
+            <small>Total ({ `per ${ pickDataPlan.price.includes('/mo') ? 'year' : 'month'} ` })</small>
+            <small className='text-violet-500 font-bold'>{ `$${+dataGlobal.reduce((a:number,b:number) => a + b, planPrice() ) }${pickDataPlan.price.includes('/mo') ? '/mo' : '/yr'}`}</small>
            </div>
         <div className="md:flex justify-between mt-20 items-center hidden">
           

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { MyInterface } from '../shared/modal';
 import { useEffect, useState} from 'react';
-import NavigateMultiStep from './NAvigateMultiStep';
+import NavigateMultiStep from './NavigateMultiStep';
 
 
 const Plan:React.FC = () => {
@@ -9,13 +9,11 @@ const Plan:React.FC = () => {
 const [pick, setPick] = useState<MyInterface>();
 const [pickPeriod, setPickPeriod] = useState<number>(0)
 const [pickPeriodOne, setPickPeriodOne] = useState<number>(3)
-const [isOn, setIsOn] = useState<string | boolean>(false)
 const [validateForm, setValidateForm] = useState<boolean>(false)
+const [isChecked, setIsChecked] = useState<boolean>(false);
 
 
-
-
-  const plan: MyInterface[] =  [
+const plan: MyInterface[] =  [
     {
       id: 1,
       img:"public/icon-arcade.svg",
@@ -55,26 +53,21 @@ const [validateForm, setValidateForm] = useState<boolean>(false)
       price: "$150/yr",
        offer: "2 months free"
     }
-
-    
-
   ]
 
   const activeBox = (data:MyInterface):void =>{
     setValidateForm(true)
     setPick(data)
-
-  }
-
-  // Data de Localstorage
-    useEffect(()=>{
+}
+// Data de Localstorage
+useEffect(()=>{
         const storedData = localStorage.getItem('myDataPlan')
         if(storedData){
             setPick(JSON.parse(storedData))
         }
 
     },[])
-    useEffect(()=>{
+useEffect(()=>{
           if(pick){
             localStorage.setItem('myDataPlan', JSON.stringify(pick))
         }
@@ -82,14 +75,17 @@ const [validateForm, setValidateForm] = useState<boolean>(false)
     },[pick])
 
 const modePeriod = (e:any)=>{
-console.log(e.target.value);
-setIsOn(true)
-
+setIsChecked(e.currentTarget.checked)
+if(isChecked){
+  setPickPeriod(0);
+  setPickPeriodOne(3) 
+}else{
+    setPickPeriod(3);
+  setPickPeriodOne(6)
+}
 } 
-console.log(isOn);
 
-  
-  return (
+return (
        <div className='md:max-w-4xl md:container md:mx-auto '>
 <div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
 <NavigateMultiStep/>
@@ -107,12 +103,11 @@ Please provide your name, email, adress and phone number
     </div>
     <div >
       
-        <ul className="flex md:space-x-5 space-y-3 md:space-y-0 mt-8 flex-col md:flex-row md:px-0 px-12  ">
+        <ul className="flex md:space-x-5 space-y-3 md:space-y-0 mt-8 flex-col md:flex-row md:px-0 px-12   ">
             {
                 plan.slice(pickPeriod, pickPeriodOne
-                 ).map((level,index) => <li key={index}  className={`focus:bg-slate-100 flex md:flex-col md:items-start 
+                 ).map((level,index) => <li key={index}  className={`  flex md:flex-col md:items-start }
                  items-center cursor-pointer p-6 border w-full md:h-44 h-16 border-gray-300 rounded-xl `}  
-           
                 onClick={()=> activeBox(level)}>
                 
         <img src={level.img} alt="" />
@@ -130,7 +125,7 @@ Please provide your name, email, adress and phone number
         <div className="bg-gray-100 space-x-4 flex justify-center mt-6 py-4 rounded-md mx-12 px-12 md:mx-0">
     <p className="text-blue-900 font-bold">Monthly</p>
     <label className="relative inline-flex items-center cursor-pointer">
-    <input type="checkbox" className="sr-only peer" onChange={(e)=> modePeriod(e)} />
+    <input type="checkbox" className="sr-only peer" onChange={(e)=> modePeriod(e)} checked={isChecked}/>
     <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none  peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
     </label>
     <p className="text-gray-400 font-bold">Yearly</p>
@@ -151,17 +146,12 @@ Please provide your name, email, adress and phone number
        </div>
      
     </div>
-        
-        
-    </div>
+
+ </div>
     
    </div>
 
-
-
-
-
-   </div>
+ </div>
     {/* Display on the mobile */}
 <div className="flex justify-between mt-20 items-center md:hidden mx-8 ">
        <NavLink to='/'>

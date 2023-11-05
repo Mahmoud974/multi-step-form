@@ -1,19 +1,15 @@
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { MyInterface } from '../shared/modal';
 import NavigateMultiStep from './NavigateMultiStep';
-
-
-
 
 const PickAddOns:React.FC = () => {
 const [data, setData] = useState<string[]>(()=>{
     const storedData = localStorage.getItem('myData');
     return storedData ? JSON.parse(storedData) : []
   })
-    // console.log(data);
-    
-    const priceService:MyInterface[] = [
+
+const priceService:MyInterface[] = [
         {
             id: 1,
             title: 'Online service',
@@ -36,12 +32,12 @@ const [data, setData] = useState<string[]>(()=>{
 
         }
     ]
-  const updateData = (newData:string[]) =>{
+  const updateData = (newData:string[]):void =>{
   setData(newData);
   localStorage.setItem('data', JSON.stringify(newData))
 }
-const addData = (ok:any) =>{
-  const newData = [...data, ok];
+const addData = (item:any):void =>{
+  const newData = [...data, item];
   updateData(newData)
 }
 
@@ -50,8 +46,7 @@ return (
 <div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
 <NavigateMultiStep/>
 
-
-  <div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
+<div className=' mx-auto flex justify-center md:p-12 md:ml-0  '>
   <div className='bg-white  rounded-xl -mt-12 pb-12 md:pb-0'>
       <div className='px-12 md:px-0'>
          <h1 className="md:text-3xl text-xl font-bold text-blue-900 mt:pt-0 pt-12 ">
@@ -66,6 +61,7 @@ Add-ons help enhance your gaming experience.
             {
                 priceService.map(option =>
                      <li key={option.id} className=" mt-6 p-2 md:w-[30em]  border border-violet-500 md:p-4 mx-12 md:mx-0 rounded-xl md:h-24 h-16 "  onClick={()=> addData(option)} >
+               
                <label htmlFor={option.title} className='flex justify-between'>
                  <input type="checkbox" name=""  className='w-3 md:w-4'/>
                 <div>
@@ -89,7 +85,7 @@ Add-ons help enhance your gaming experience.
             <p className="text-blue-900 font-bold cursor-pointer ">Go back</p>
         </NavLink>
        <NavLink to='/step4'>
- <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12 cursor-pointer"/>
+ <input type="submit" value="Next Step" className=" bg-blue-900 hover:bg-blue-700 w-28 rounded-xl text-white h-12 cursor-pointer"/>
 </NavLink>
     </div>
     </div>
@@ -102,7 +98,7 @@ Add-ons help enhance your gaming experience.
             <p className="text-blue-900 font-bold cursor-pointer ">Go back</p>
         </NavLink>
        <NavLink to='/step4'>
- <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12 cursor-pointer"/>
+ <input type="submit" value="Next Step" className=" bg-blue-900 hover:bg-blue-700 w-28 rounded-xl text-white h-12 cursor-pointer"/>
 </NavLink>
    </div>
    </div>

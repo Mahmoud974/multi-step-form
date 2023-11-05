@@ -2,20 +2,14 @@ import { useForm } from 'react-hook-form';
 import { IFormInput } from '../shared/modal';
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import NavigateMultiStep from './NAvigateMultiStep';
-
+import NavigateMultiStep from './NavigateMultiStep';
 
 const PersonalForm:React.FC = () => {
-  
-  
 const { register, handleSubmit,formState: { errors } } = useForm<IFormInput>();
 const [validateMyForm, setValidateMyForm] = useState<boolean>(false)
-
-
 const onSubmit = ():void => setValidateMyForm(true)
 
-  
-  return (
+return (
      <div className='md:max-w-4xl md:container md:mx-auto '>
 <div className=' md:bg-white md:w-full md:h-[37em] md:flex md:justify-start  md:p-3 w-full  md:rounded-xl '>
 <NavigateMultiStep/>
@@ -36,7 +30,7 @@ Please provide your name, email, adress and phone number
       errors.lastname && <span className='text-xs font-bold text-red-600 '>This field is required</span>
     }
   </div>
-    <input type="text"  className={`border-2 h-12 rounded-xl ${errors.lastname &&  `border-red-400`}`}  placeholder="&nbsp; &nbsp; e.g. Stephen King" {...register("lastname", {required: true, minLength:12, pattern: /^[A-Za-z]+$/i})} />
+    <input type="text"  className={`border-2 h-12 rounded-xl ${errors.lastname &&  `border-red-400`}`}  placeholder="&nbsp; &nbsp; e.g. Stephen King" {...register("lastname", {required: true, minLength:12, pattern: /^[\p{L}\p{M}\s'-]+$/u})} />
    
   
 
@@ -57,16 +51,15 @@ Please provide your name, email, adress and phone number
       {validateMyForm ?
         <NavLink to='/step2' >
 
-        <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8 " />
+        <input type="submit" value="Next Step" className="cursor-pointer bg-blue-900 w-28 rounded-xl text-white h-12  mt-8 " />
       </NavLink> :  
 
-        <input type="submit" value="Next Step" className="bg-blue-900 w-28 rounded-xl text-white h-12  mt-8 " />
+        <input type="submit" value="Next Step" className="cursor-pointer bg-blue-900 hover:bg-blue-700 w-28 rounded-xl text-white h-12  mt-8 " />
      }
     
     </div>
   </form>
-  
-    </div>
+  </div>
     
     </div>
    </div>
