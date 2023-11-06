@@ -30,7 +30,7 @@ Please provide your name, email, adress and phone number
       errors.lastname && <span className='text-xs font-bold text-red-600 '>This field is required</span>
     }
   </div>
-    <input type="text"  className={`border-2 h-12 rounded-xl ${errors.lastname &&  `border-red-400`}`}  placeholder="&nbsp; &nbsp; e.g. Stephen King" {...register("lastname", {required: true, minLength:12, pattern: /^[\p{L}\p{M}\s'-]+$/u})} />
+    <input type="text"  className={`border-2 h-12 rounded-xl ${errors.lastname &&  `border-red-400`}`}  placeholder="&nbsp; &nbsp; e.g. Stephen King" {...register("lastname", {required: true, minLength:1, pattern: /^[\p{L}\p{M}\s'-]+$/u})} />
    
   
 
@@ -46,6 +46,7 @@ Please provide your name, email, adress and phone number
     {  errors.telephone && <span className='text-xs font-bold text-red-600 mt-6'>This field is required</span>}
    </div>
     <input type="text" className={`border-2 h-12 rounded-xl ${errors.telephone &&  `border-red-400`}`}  placeholder="&nbsp; &nbsp;e.g. +1 234 567 890"  {...register("telephone", {required: true, pattern: /^\d{10,}$/, minLength: 10})}/>
+
 {/* Display on the desktop */}
     <div className="md:flex justify-end hidden  ">
       {validateMyForm ?
